@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etch A sketch Project</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <button onclick="resetGrid()">New Grid</button>
+    <div class="container"></div>
+
+
+<script>
+    const container = document.querySelector(".container")
+
+
+    // function create grid?
+    function createGrid(size){
+        // clear old grid
+        container.textContent = ""
+
+        let squareSize = 960 / size
+
+
+        for(let i = 0; i < size * size; i++){
+        const square = document.createElement("div")
+        
+        square.classList.add("square")
+        square.style.width = squareSize + "px"
+        square.style.height = squareSize + "px"
+
+
+        // hover effect
+square.addEventListener("mousemove", () => {
+   square.style.backgroundColor = `rgb(
+    ${Math.random() * 255},
+    ${Math.random() * 255},
+    ${Math.random() * 255}
+)`
+})
+
+container.appendChild(square)
+        }
+    }
+
+   
+createGrid(16)
+
+
+function resetGrid(){
+    let userInput = prompt("Enter number of squares (max 100)")
+
+if(userInput > 100){
+    alert("Too big! Max is 100")
+    return
+}
+
+createGrid(userInput)
+}
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
