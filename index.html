@@ -3,69 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Etch A sketch Project</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Square</title>
+    <style>
+
+        body{
+            margin: 0;
+            padding: 0;
+            background-color: beige;
+        }
+
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 960px;
+    height: 960px;
+    border: 1px solid black;
+    margin: 0 auto;
+
+}
+
+.square{
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+
+button{
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    border: 2px solid red;
+}
+    </style>
 </head>
 <body>
-    <button onclick="resetGrid()">New Grid</button>
+    <!-- Pseudocode -->
+<!-- 1. for html
+ 1. a button with text enter grid with an onclick event that calls the reset button to reset previous grid display
+ 2. A container div that will be a parent for for the square div size user will enter -->
+ <button onclick="resetGrid()">Enter grid number</button>
     <div class="container"></div>
 
+    <script>
+        // 1. get the dom element for container
+      const container = document.querySelector(".container")
 
-<script>
-    const container = document.querySelector(".container")
-
-
-    // function create grid?
+    //   2. function to create grid that takes size
     function createGrid(size){
         // clear old grid
+
         container.textContent = ""
+        //   3. set a variable that divides 960 being container size by size..this is to ensure size fits container perfectly
 
         let squareSize = 960 / size
-
-
-        for(let i = 0; i < size * size; i++){
-        const square = document.createElement("div")
         
-        square.classList.add("square")
-        square.style.width = squareSize + "px"
-        square.style.height = squareSize + "px"
+        //   4. use a for loop to loop over size starting at one until i < size * size
+        for(let i = 0; i < size * size; i++){
+
+            //5. create a div element
+            const square = document.createElement("div")
+
+            // 7. add a class list to div
+            square.classList.add("square")
+    
+            // 5. div.width should be size variable + "px"
+            square.style.width = squareSize + "px"
+// 6. div height should be same as width
+            square.style.height = squareSize + "px"
+
+            
 
 
-        // hover effect
-square.addEventListener("mousemove", () => {
-   square.style.backgroundColor = `rgb(
-    ${Math.random() * 255},
-    ${Math.random() * 255},
-    ${Math.random() * 255}
-)`
-})
-
+            // 8. add a dynamic background color to div when mousemove on initial
+            square.addEventListener("mousemove", () => {
+                square.style.backgroundColor = `rgb(
+                ${Math.random()*255}
+                ${Math.random()*255}
+                ${Math.random()*255}
+                )`
+            })
+          
+              //9. append div to container
 container.appendChild(square)
-        }
+        } 
     }
 
-   
+//  10. Call createGrid with 16 as defualt square
 createGrid(16)
 
 
-function resetGrid(){
-    let userInput = prompt("Enter number of squares (max 100)")
 
-if(userInput > 100){
+  //11. create resetGrid function
+  function resetGrid(){
+    // 12.  let user input promt fro grid number at max of 100
+    let userInput = prompt("Enter number of squares (Max 100)")
+ //13 if input is more than 100 
+ if(userInput > 100){
     alert("Too big! Max is 100")
     return
+    //alert it should not be more than 100
+//   then call createGrid with user input
+ }
+
+
+ createGrid(userInput)
 }
-
-createGrid(userInput)
-}
-
-
-
-
-
-
-
-</script>
-
+    </script>
 </body>
 </html>
